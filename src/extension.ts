@@ -90,7 +90,11 @@ class Paster {
         }
         let filePath = fileUri.fsPath;
         let folderPath = path.dirname(filePath);
-        let projectPath = vscode.workspace.rootPath;
+        let projectPath = '';
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (workspaceFolders && workspaceFolders.length > 0) {
+            projectPath = workspaceFolders[0].uri.fsPath;
+        }
 
         // get selection as image file name, need check
         var selection = editor.selection;
