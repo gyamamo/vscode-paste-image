@@ -394,6 +394,7 @@ class Paster {
         let imageSyntaxSuffix = ""
         switch (languageId) {
             case "markdown":
+            case "quarto":
                 imageSyntaxPrefix = `![](`
                 imageSyntaxSuffix = `)`
                 break;
