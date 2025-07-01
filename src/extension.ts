@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as fse from 'fs-extra';
 import { spawn } from 'child_process';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as upath from 'upath';
 
 class Logger {
@@ -38,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
         try {
             Paster.paste();
         } catch (e) {
-            Logger.showErrorMessage(e)
+            Logger.showErrorMessage(String(e))
         }
     });
 
@@ -90,7 +90,11 @@ class Paster {
         }
         let filePath = fileUri.fsPath;
         let folderPath = path.dirname(filePath);
-        let projectPath = vscode.workspace.rootPath;
+        let projectPath = '';
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (workspaceFolders && workspaceFolders.length > 0) {
+            projectPath = workspaceFolders[0].uri.fsPath;
+        }
 
         // get selection as image file name, need check
         var selection = editor.selection;
@@ -309,11 +313,11 @@ class Paster {
                 '-file', scriptPath,
                 imagePath
             ]);
-            powershell.on('error', function (e) {
+            powershell.on('error', function (e: NodeJS.ErrnoException) {
                 if (e.code == "ENOENT") {
                     Logger.showErrorMessage(`The powershell command is not in you PATH environment variables. Please add it and retry.`);
                 } else {
-                    Logger.showErrorMessage(e);
+                    Logger.showErrorMessage(e.message ?? String(e));
                 }
             });
             powershell.on('exit', function (code, signal) {
@@ -328,8 +332,8 @@ class Paster {
             let scriptPath = path.join(__dirname, '../../res/mac.applescript');
 
             let ascript = spawn('osascript', [scriptPath, imagePath]);
-            ascript.on('error', function (e) {
-                Logger.showErrorMessage(e);
+            ascript.on('error', function (e: Error) {
+                Logger.showErrorMessage(e.message);
             });
             ascript.on('exit', function (code, signal) {
                 // console.log('exit',code,signal);
@@ -343,8 +347,8 @@ class Paster {
             let scriptPath = path.join(__dirname, '../../res/linux.sh');
 
             let ascript = spawn('sh', [scriptPath, imagePath]);
-            ascript.on('error', function (e) {
-                Logger.showErrorMessage(e);
+            ascript.on('error', function (e: Error) {
+                Logger.showErrorMessage(e.message);
             });
             ascript.on('exit', function (code, signal) {
                 // console.log('exit',code,signal);

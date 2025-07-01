@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.1.1 (Unreleased)
+
+- Bundle extension using esbuild
+- Exclude node modules from the packaged VSIX
+- Mark the VS Code API as external during bundling
+
+## 1.1.0 (July 1, 2025)
+
+- Modernize dependencies and TypeScript
+- Target newer versions of VS Code
+- Replace deprecated `vscode` package with `@types/vscode`
+- Fix compile errors when building with TypeScript 5
+
 ## 1.0.4 (January 23, 2018)
 
 - Fix: paste image get blank image issue (windows)

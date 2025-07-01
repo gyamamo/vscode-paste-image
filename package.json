@@ -2,7 +2,7 @@
   "name": "vscode-paste-image",
   "displayName": "Paste Image",
   "description": "paste image from clipboard directly",
-  "version": "1.0.4",
+  "version": "1.1.1",
   "publisher": "mushan",
   "author": {
     "name": "mushan",
@@ -29,7 +29,7 @@
     "keybindings"
   ],
   "engines": {
-    "vscode": "^1.0.0"
+    "vscode": "^1.80.0"
   },
   "categories": [
     "Other"
@@ -37,7 +37,11 @@
   "activationEvents": [
     "onCommand:extension.pasteImage"
   ],
-  "main": "./out/src/extension",
+  "main": "./dist/extension.js",
+  "files": [
+    "dist",
+    "res"
+  ],
   "contributes": {
     "configuration": {
       "type": "object",
@@ -130,18 +134,21 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install"
+    "bundle": "esbuild src/extension.ts --bundle --platform=node --target=node18 --external:vscode --outfile=dist/extension.js",
+    "vscode:prepublish": "npm run bundle",
+    "compile": "tsc -w -p ./"
   },
   "dependencies": {
     "copy-paste": "^1.2.0",
-    "fs-extra": "^3.0.1",
-    "moment": "^2.14.1",
-    "upath": "^1.0.0"
+    "fs-extra": "^11.1.1",
+    "moment": "^2.29.4",
+    "upath": "^2.0.1"
   },
   "devDependencies": {
-    "typescript": "^1.8.5",
-    "vscode": "^0.11.0"
+    "typescript": "^5.2.2",
+    "@types/node": "^20.5.9",
+    "@types/vscode": "^1.80.0",
+    "@vscode/test-electron": "^2.3.0",
+    "esbuild": "^0.19.3"
   }
 }
