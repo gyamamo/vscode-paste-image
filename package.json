@@ -29,7 +29,7 @@
     "keybindings"
   ],
   "engines": {
-    "vscode": "^1.0.0"
+    "vscode": "^1.70.0"
   },
   "categories": [
     "Other"
@@ -130,9 +130,9 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
   },
   "dependencies": {
     "copy-paste": "^1.2.0",
@@ -141,7 +141,8 @@
     "upath": "^1.0.0"
   },
   "devDependencies": {
-    "typescript": "^1.8.5",
-    "vscode": "^0.11.0"
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0",
+    "vscode": "^1.70.0"
   }
 }
