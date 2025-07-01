@@ -5,6 +5,7 @@
 - Modernize dependencies and TypeScript
 - Target newer versions of VS Code
 - Replace deprecated `vscode` package with `@types/vscode`
+- Fix compile errors when building with TypeScript 5
 
 ## 1.0.4 (January 23, 2018)
 
