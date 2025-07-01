@@ -134,9 +134,8 @@
     ]
   },
   "scripts": {
-    "build": "tsc -p ./",
-    "bundle": "esbuild src/extension.ts --bundle --platform=node --target=node18 --outfile=dist/extension.js",
-    "vscode:prepublish": "npm run build && npm run bundle",
+    "bundle": "esbuild src/extension.ts --bundle --platform=node --target=node18 --external:vscode --outfile=dist/extension.js",
+    "vscode:prepublish": "npm run bundle",
     "compile": "tsc -w -p ./"
   },
   "dependencies": {
