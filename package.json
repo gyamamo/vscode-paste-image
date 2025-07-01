@@ -2,7 +2,7 @@
   "name": "vscode-paste-image",
   "displayName": "Paste Image",
   "description": "paste image from clipboard directly",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "mushan",
   "author": {
     "name": "mushan",
@@ -37,7 +37,11 @@
   "activationEvents": [
     "onCommand:extension.pasteImage"
   ],
-  "main": "./out/src/extension",
+  "main": "./dist/extension.js",
+  "files": [
+    "dist",
+    "res"
+  ],
   "contributes": {
     "configuration": {
       "type": "object",
@@ -130,7 +134,9 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "tsc -p ./",
+    "build": "tsc -p ./",
+    "bundle": "esbuild src/extension.ts --bundle --platform=node --target=node18 --outfile=dist/extension.js",
+    "vscode:prepublish": "npm run build && npm run bundle",
     "compile": "tsc -w -p ./"
   },
   "dependencies": {
@@ -143,6 +149,7 @@
     "typescript": "^5.2.2",
     "@types/node": "^20.5.9",
     "@types/vscode": "^1.80.0",
-    "@vscode/test-electron": "^2.3.0"
+    "@vscode/test-electron": "^2.3.0",
+    "esbuild": "^0.19.3"
   }
 }

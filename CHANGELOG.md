@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.1.1 (Unreleased)
+
+- Bundle extension using esbuild
+- Exclude node modules from the packaged VSIX
+
 ## 1.1.0 (July 1, 2025)
 
 - Modernize dependencies and TypeScript

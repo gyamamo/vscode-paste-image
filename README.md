@@ -235,8 +235,9 @@ If you have some any question or advice, Welcome to [issue](https://github.com/m
 
 ## Development
 
-This project now targets modern versions of VS Code and Node.js. To compile the
-extension run:
+This project now targets modern versions of VS Code and Node.js. The source in
+`src/` is bundled with [esbuild](https://esbuild.github.io/) so only a single
+JavaScript file ships with the extension. To build the bundle run:
 
 ```bash
 npm install
